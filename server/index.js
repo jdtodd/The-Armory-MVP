@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.sendStatus(200);
 })
 app.get('/game', (req, res) => {
-  console.log(req)
+
   axios.get(`https://www.giantbomb.com/api/search/?api_key=dbbeaebbcf26215fc71a790a44e6f8e9dbb0cabe&query=${req.query.searchTerm}&format=json&resources=game`, {
     headers: {
       'Access-Control-Allow-Origin': '*'
@@ -22,7 +22,7 @@ app.get('/game', (req, res) => {
       res.send(response.data.results);
     })
     .catch((err) => {
-      res.send(err);
+      res.status(500).send(err);
     })
 })
 app.listen(port, () => {

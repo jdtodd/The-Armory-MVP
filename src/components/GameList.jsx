@@ -2,6 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 
 class GameList extends React.Component {
@@ -13,7 +14,7 @@ class GameList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
+    if (this.props.gameList !== prevProps.gameList) {
       this.setState({games: this.props.gameList})
     }
   }
@@ -23,15 +24,19 @@ class GameList extends React.Component {
       <div>
         {this.state.games.map((game, index) => {
           return (
-            <div key={index}>
-              <Container fluid="xl">
+            <div className="game-info" key={index} style={{marginBottom: 50 + 'px'}}>
+              <Container fluid="xxl" style={{borderBottom: 2 + 'px solid black'}}>
                 <Row>
                   <Col>
                     <h3 id="cover-image">{game.name}</h3>
-                    <img src={game.image.medium_url} />
+                    <img src={game.image.medium_url} style={{width: 500 + 'px', height: 'auto'}}/>
+                  </Col>
+                  <Col md={{offset: 2}}>
+                    <div>Release Date: {game.original_release_date}</div>
+                    <div>{game.original_game_rating ? game.original_game_rating[0].name : null}</div>
                   </Col>
                   <Col>
-                    <p>Release Date: {new Date(game.original_release_date)}</p>
+                    <Button variant="outline-dark" onClick={() => {this.props.addToFavorites(game)}}>Add To Favorites</Button>
                   </Col>
                 </Row>
                 <Row>
