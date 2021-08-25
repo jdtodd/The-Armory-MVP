@@ -1,0 +1,13 @@
+.header {
+  background-color: #191717;
+}
+.logo {
+  width: 400px;
+  height: auto;
+}
+#login-btn {
+  color: white;
+}
+#signup-btn {
+  color: white;
+}
