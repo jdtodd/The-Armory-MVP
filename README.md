@@ -5,7 +5,7 @@
 Written using MySQL, Express.js, Node.js, React, React-Bootstrap, Webpack/Babel, and Axios
 
 ### Features
- * Search bar that communicates with GiantBomb API. Returns list of 10 games that are the closest match to the name searched.
+ * Search bar that communicates with GiantBomb API. Returns list of up to 10 games that are the closest match to the name searched.
  * Each game in the list contains:
     * Title
     * Date Released
