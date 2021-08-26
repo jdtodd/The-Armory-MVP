@@ -27,6 +27,6 @@ Written using MySQL, Express.js, Node.js, React, React-Bootstrap, Webpack/Babel,
  * Clone repository
  * **npm install**
  * In seperate terminals:
-  * Run **npm run dev** to build bundled file through webpack
-  * Run **npm start** to start the server
+   * Run **npm run dev** to build bundled file through webpack
+   * Run **npm start** to start the server
 
