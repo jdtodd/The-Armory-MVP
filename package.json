@@ -26,13 +26,14 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "file-loader": "^6.2.0",
+    "mysql": "^2.18.1",
     "nodemon": "^2.0.12",
     "react": "^16.6.0",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^16.6.0",
-    "regenerator-runtime": "^0.13.9",
-    "simple-jsonp-promise": "^1.1.0"
+    "regenerator-runtime": "^0.13.9"
   }
 }

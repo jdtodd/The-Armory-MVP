@@ -21,7 +21,7 @@ class GameList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginTop: 30 + 'px'}}>
         {this.state.games.map((game, index) => {
           return (
             <div className="game-info" key={index} style={{marginBottom: 50 + 'px'}}>
@@ -48,6 +48,7 @@ class GameList extends React.Component {
             </div>
           )
         })}
+        {this.state.games.length > 1 ? <div className="footer" style={{mariginTop: 20 + 'px'}}>Game data provided by <a href="https://www.giantbomb.com/">giantbomb.com</a></div> : null}
       </div>
     )
   }
