@@ -38,8 +38,6 @@ div.row {
   color: black;
 }
 .footer {
-  margin-top: 30px;
-  padding: 20px 0 10px 50px;
   color: black;
   vertical-align: bottom;
 }
@@ -84,7 +82,6 @@ button.close {
   right: 10px;
 }
 .game-info {
-  margin-bottom: 20px;
   padding-bottom: 20px;
 }
 form {

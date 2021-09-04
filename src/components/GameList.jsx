@@ -23,13 +23,7 @@ class GameList extends React.Component {
       <div style={{ marginTop: 30 + 'px' }}>
         {this.state.games.map((game, index) => {
           return (
-            <div
-              className='game-info'
-              key={index}
-              style={{
-                marginBottom: 50 + 'px',
-              }}
-            >
+            <div className='game-info' key={index}>
               <Container
                 fluid='xxl'
                 style={{
