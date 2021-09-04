@@ -6,9 +6,10 @@ USE TheArmory;
 
 CREATE TABLE Users (
   id INT NOT NULL AUTO_INCREMENT,
-  username TINYTEXT NOT NULL,
+  username CHAR(20) NOT NULL,
   password TINYTEXT NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  UNIQUE (username)
 );
 
 CREATE TABLE Favorites (

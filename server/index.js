@@ -14,8 +14,8 @@ app.use(express.static(path.join(__dirname, '../dist')));
 app.get('/', (req, res) => {
   res.sendStatus(200);
 })
-app.get('/game', (req, res) => {
 
+app.get('/game', (req, res) => {
   axios.get(`https://www.giantbomb.com/api/search/?api_key=dbbeaebbcf26215fc71a790a44e6f8e9dbb0cabe&query=${req.query.searchTerm}&format=json&resources=game`, {
     headers: {
       'Access-Control-Allow-Origin': '*'
@@ -46,7 +46,6 @@ app.post('/create', (req, res) => {
           res.send(result);
         }
       })
-
     }
   })
 })
@@ -69,6 +68,30 @@ app.post('/addToFavs', (req, res) => {
     }
   })
 })
+
+app.post('/login', (req, res) => {
+  let queryArgs = [req.body.username, req.body.password]
+  connection.query('SELECT id, username from Users WHERE (username = ? AND password = ?)', queryArgs, (err, signInResult) => {
+    if (err) {
+      console.error(err);
+      res.sendStatus(500);
+    } else {
+      console.log(signInResult);
+      res.status(200);
+      connection.query('SELECT game FROM Favorites WHERE user_id = ?', [signInResult[0].id], (err, favoritesResult) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(favoritesResult);
+          let signInResponse = {userInfo: signInResult, favoritesList: favoritesResult}
+          res.status(200);
+          res.send(signInResponse);
+        }
+      })
+    }
+  })
+});
+
 app.listen(port, () => {
   console.log('Listening on port ' + port);
 })
