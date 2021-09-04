@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Modal from "react-bootstrap/Modal";
-import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalBody from "react-bootstrap/ModalBody";
-import ModalFooter from "react-bootstrap/ModalFooter";
-import Alert from "react-bootstrap/Alert";
-import logo from "../styles/TheArmory.jpg";
-import axios from "axios";
-import GameList from "./GameList.jsx";
-import FavoritesList from "./FavoritesList.jsx";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Modal from 'react-bootstrap/Modal';
+import ModalHeader from 'react-bootstrap/ModalHeader';
+import ModalBody from 'react-bootstrap/ModalBody';
+import ModalFooter from 'react-bootstrap/ModalFooter';
+import Alert from 'react-bootstrap/Alert';
+import logo from '../styles/TheArmory.jpg';
+import axios from 'axios';
+import Header from './Header.jsx';
+import GameList from './GameList.jsx';
+import FavoritesList from './FavoritesList.jsx';
 import SignUpModal from './SignUpModal.jsx';
 import SignInModal from './SignInModal.jsx';
 
@@ -28,10 +29,10 @@ export default class App extends Component {
       favorites: [],
       showSignUp: false,
       showLogin: false,
-      userEmail: "",
-      username: "",
-      userPassword: "",
-      userId: "",
+      userEmail: '',
+      username: '',
+      userPassword: '',
+      userId: '',
       signInFail: false,
       signInSuccess: false,
       signUpFail: false,
@@ -58,10 +59,10 @@ export default class App extends Component {
 
   onSearchSubmit(e) {
     e.preventDefault();
-    let searchTerm = "";
+    let searchTerm = '';
     for (var i = 0; i < this.state.searchTerm.length; i++) {
-      if (this.state.searchTerm[i] === " ") {
-        searchTerm += "%20";
+      if (this.state.searchTerm[i] === ' ') {
+        searchTerm += '%20';
       } else {
         searchTerm += this.state.searchTerm[i];
       }
@@ -88,7 +89,7 @@ export default class App extends Component {
         .catch((err) => {
           console.error(err);
           alert(
-            "There was a problem adding the game to your favorites list. Please try again."
+            'There was a problem adding the game to your favorites list. Please try again.'
           );
         });
     }
@@ -111,7 +112,7 @@ export default class App extends Component {
   goHome() {
     this.setState({
       games: [],
-      searchTerm: "",
+      searchTerm: '',
       favoritesClicked: false,
     });
   }
@@ -148,8 +149,8 @@ export default class App extends Component {
           for (let i = 0; i < this.state.favorites.length; i++) {
             axios.post('/addToFavs', {
               userId: res.data[0].id,
-              game: this.state.favorites[i]
-            })
+              game: this.state.favorites[i],
+            });
           }
         }
       })
@@ -161,7 +162,7 @@ export default class App extends Component {
   onLogin() {
     this.setState({ showLogin: false });
     axios
-      .post("http://127.0.0.1:3000/login", {
+      .post('http://127.0.0.1:3000/login', {
         username: this.state.username,
         password: this.state.userPassword,
       })
@@ -190,10 +191,10 @@ export default class App extends Component {
       favorites: [],
       showSignUp: false,
       showLogin: false,
-      userEmail: "",
-      username: "",
-      userPassword: "",
-      userId: "",
+      userEmail: '',
+      username: '',
+      userPassword: '',
+      userId: '',
       signInFail: false,
       signInSuccess: false,
     });
@@ -202,91 +203,23 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <div className="header" style={{ height: 75 + "px" }}>
-          <Container fluid>
-            <Row>
-              <Col xs={3}>
-                <img
-                  className="logo"
-                  onClick={this.goHome}
-                  src={logo}
-                  alt="The Armory Logo"
-                ></img>
-              </Col>
-              <Col xs={6}>
-                <Form style={{display: 'inline-block'}}>
-                  <br/>
-                  <Form.Control
-                    size="sm"
-                    id="search-bar"
-                    type="text"
-                    placeholder="Search for your favorite game!"
-                    onChange={this.onSearchbarInput}
-                    onKeyPress={(e) => { e.key === 'Enter' && this.onSearchSubmit(e); }}
-                    style={{
-                      display: "inline-block",
-                      marginRight: 20 + "px",
-                    }}
-                    />
-                </Form>
-                <Button id="search-button" variant="outline-dark" onClick={this.onSearchSubmit} size="sm" >
-                  Search
-                </Button>
-              </Col>
-              <Col xs={1}>
-                {this.state.loggedIn ? (
-                  <h6 id="user-greeting">Hi, {this.state.username}!</h6>
-                ) : (
-                  <Button
-                    id="login-btn"
-                    variant="outline-dark"
-                    size="sm"
-                    onClick={this.showLogin}
-                  >
-                    Login
-                  </Button>
-                )}
-              </Col>
-              <Col xs={1}>
-                {this.state.loggedIn ? (
-                  <Button
-                    id="sign-out-btn"
-                    size="sm"
-                    variant="outline-dark"
-                    onClick={this.onSignout}
-                  >
-                    Sign Out
-                  </Button>
-                ) : (
-                  <Button
-                    id="signup-btn"
-                    size="sm"
-                    variant="outline-dark"
-                    onClick={this.showSignUp}
-                  >
-                    Sign-up
-                  </Button>
-                )}
-              </Col>
-              <Col xs={1}>
-                <Button
-                  id="favorite-btn"
-                  size="sm"
-                  variant="outline-dark"
-                  onClick={this.showFavorites}
-                >
-                  Favorites
-                </Button>
-              </Col>
-            </Row>
-          </Container>
-        </div>
+        <Header
+          goHome={this.goHome}
+          onSearchbarInput={this.onSearchbarInput}
+          onSearchSubmit={this.onSearchSubmit}
+          username={this.state.username}
+          showLogin={this.showLogin}
+          onSignout={this.onSignout}
+          showSignUp={this.showSignUp}
+          showFavorites={this.showFavorites}
+          loggedIn={this.state.loggedIn}
+        />
         <div>
           {this.state.signInFail ? (
             <Alert
-              variant="danger"
+              variant='danger'
               dismissible
-              closeLabel=""
+              closeLabel=''
               onClose={() => {
                 this.setState({ signInFail: false });
               }}
@@ -296,9 +229,9 @@ export default class App extends Component {
             </Alert>
           ) : this.state.signInSuccess ? (
             <Alert
-              variant="success"
+              variant='success'
               dismissible
-              closeLabel=""
+              closeLabel=''
               onClose={() => {
                 this.setState({ signInSuccess: false });
               }}
@@ -307,20 +240,21 @@ export default class App extends Component {
             </Alert>
           ) : this.state.signUpFail ? (
             <Alert
-              variant="danger"
-              closeLabel=""
+              variant='danger'
+              closeLabel=''
               dismissible
               onClose={() => {
                 this.setState({ signUpFail: false });
               }}
             >
-              We were unable to create your account. There is already another user with that username.
+              We were unable to create your account. There is already another
+              user with that username.
             </Alert>
           ) : null}
         </div>
 
         {!this.state.favoritesClicked ? (
-          <div id="main">
+          <div id='main'>
             <div>
               <GameList
                 gameList={this.state.games}

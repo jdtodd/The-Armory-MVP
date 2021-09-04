@@ -6,47 +6,71 @@ import Button from 'react-bootstrap/Button';
 
 class FavoritesList extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      favorites: props.favorites
-    }
+      favorites: props.favorites,
+    };
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.favorites !== this.props.favorites) {
-      this.setState({ favorites: this.props.favorites })
+      this.setState({ favorites: this.props.favorites });
     }
   }
 
   render() {
     return (
-      <Container style={{marginTop: 30 + 'px', borderBottom: 2 + 'px solid black', marginBottom: '20px'}} fluid="xxl">
+      <Container
+        style={{
+          marginTop: 30 + 'px',
+          borderBottom: 2 + 'px solid black',
+          marginBottom: '20px',
+        }}
+        fluid='xxl'
+      >
         {this.state.favorites.map((game, index) => {
           return (
-            <div key={index} className="game-info">
+            <div key={index} className='game-info'>
               <Row>
                 <Col>
-                  <h3 id="cover-image">{game.name}</h3>
-                  <img src={game.image.medium_url} style={{width: 500 + 'px', height: 'auto'}}/>
+                  <h3 id='cover-image'>{game.name}</h3>
+                  <img
+                    src={game.image.medium_url}
+                    style={{ width: 500 + 'px', height: 'auto' }}
+                  />
                 </Col>
-                <Col md={{offset: 2}}>
+                <Col md={{ offset: 2 }}>
                   <div>Release Date: {game.original_release_date}</div>
-                  <div>{game.original_game_rating ? game.original_game_rating[0].name : null}</div>
+                  <div>
+                    {game.original_game_rating
+                      ? game.original_game_rating[0].name
+                      : null}
+                  </div>
                 </Col>
                 <Col>
-                  <Button variant="outline-dark" onClick={() => {this.props.removeFromFavorites(game)}}>Remove from favorites</Button>
+                  <Button
+                    variant='outline-dark'
+                    onClick={() => {
+                      this.props.removeFromFavorites(game);
+                    }}
+                  >
+                    Remove from favorites
+                  </Button>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <div className="game-description" dangerouslySetInnerHTML={{__html: game.description}}></div>
+                  <div
+                    className='game-description'
+                    dangerouslySetInnerHTML={{ __html: game.description }}
+                  ></div>
                 </Col>
               </Row>
             </div>
-          )
+          );
         })}
       </Container>
-    )
+    );
   }
 }
 
