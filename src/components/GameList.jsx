@@ -26,11 +26,16 @@ class GameList extends React.Component {
             <div
               className='game-info'
               key={index}
-              style={{ marginBottom: 50 + 'px' }}
+              style={{
+                marginBottom: 50 + 'px',
+              }}
             >
               <Container
                 fluid='xxl'
-                style={{ borderBottom: 2 + 'px solid black' }}
+                style={{
+                  borderBottom: 2 + 'px solid #00FFCD',
+                  paddingBottom: '20px',
+                }}
               >
                 <Row>
                   <Col>

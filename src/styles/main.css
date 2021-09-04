@@ -1,17 +1,25 @@
 .header {
   background-color: #191717;
+  padding-bottom: 0;
+}
+div.container-fluid,
+div.col-4,
+div.col-5,
+div.col-3,
+div.row {
+  padding-bottom: 0;
 }
 .logo {
   width: 100%;
   height: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0;
   min-width: 300px;
   max-width: 400px;
+  padding-bottom: 0;
 }
 .btn {
-  color: #B5B1B2;
-  background-color: #74226C;
+  color: #b5b1b2;
+  background-color: #74226c;
   margin-right: 20px;
   z-index: 2;
 }
@@ -37,7 +45,7 @@
 }
 body {
   height: 100%;
-  background: #114B5F;
+  background: #114b5f;
   background-repeat: no-repeat;
 }
 html {
@@ -45,13 +53,25 @@ html {
   width: 100%;
 }
 a {
-  color: #B5B1B2;
+  color: #b5b1b2;
 }
 a:hover {
-  color: #4B2142;
+  color: #4b2142;
 }
-.form-label, p, div, h1, h2, h3, h4, h5, h6 {
-  color: #B5B1B2;
+.form-label,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+td,
+th,
+div {
+  color: #b5b1b2;
+  padding-bottom: 10px;
 }
 img {
   padding-bottom: 30px;
@@ -61,7 +81,7 @@ img {
 }
 button.close {
   position: absolute;
-  right: 0;
+  right: 10px;
 }
 .game-info {
   margin-bottom: 20px;
