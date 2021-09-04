@@ -20,10 +20,10 @@ class FavoritesList extends React.Component {
 
   render() {
     return (
-      <Container style={{marginTop: 30 + 'px', borderBottom: 2 + 'px solid black'}} fluid="xxl">
+      <Container style={{marginTop: 30 + 'px', borderBottom: 2 + 'px solid black', marginBottom: '20px'}} fluid="xxl">
         {this.state.favorites.map((game, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="game-info">
               <Row>
                 <Col>
                   <h3 id="cover-image">{game.name}</h3>

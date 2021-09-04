@@ -15,6 +15,8 @@ import logo from "../styles/TheArmory.jpg";
 import axios from "axios";
 import GameList from "./GameList.jsx";
 import FavoritesList from "./FavoritesList.jsx";
+import SignUpModal from './SignUpModal.jsx';
+import SignInModal from './SignInModal.jsx';
 
 export default class App extends Component {
   constructor() {
@@ -54,7 +56,8 @@ export default class App extends Component {
     this.setState({ searchTerm: event.target.value });
   }
 
-  onSearchSubmit() {
+  onSearchSubmit(e) {
+    e.preventDefault();
     let searchTerm = "";
     for (var i = 0; i < this.state.searchTerm.length; i++) {
       if (this.state.searchTerm[i] === " ") {
@@ -141,6 +144,14 @@ export default class App extends Component {
       )
       .then((res) => {
         this.setState({ loggedIn: true, userId: res.data[0].id });
+        if (this.state.favorites.length > 0) {
+          for (let i = 0; i < this.state.favorites.length; i++) {
+            axios.post('/addToFavs', {
+              userId: res.data[0].id,
+              game: this.state.favorites[i]
+            })
+          }
+        }
       })
       .catch((err) => {
         this.setState({ signUpFail: true });
@@ -194,7 +205,7 @@ export default class App extends Component {
         <div className="header" style={{ height: 75 + "px" }}>
           <Container fluid>
             <Row>
-              <Col md={{ offset: 0.5 }}>
+              <Col xs={3}>
                 <img
                   className="logo"
                   onClick={this.goHome}
@@ -202,13 +213,34 @@ export default class App extends Component {
                   alt="The Armory Logo"
                 ></img>
               </Col>
+              <Col xs={6}>
+                <Form style={{display: 'inline-block'}}>
+                  <br/>
+                  <Form.Control
+                    size="sm"
+                    id="search-bar"
+                    type="text"
+                    placeholder="Search for your favorite game!"
+                    onChange={this.onSearchbarInput}
+                    onKeyPress={(e) => { e.key === 'Enter' && this.onSearchSubmit(e); }}
+                    style={{
+                      display: "inline-block",
+                      marginRight: 20 + "px",
+                    }}
+                    />
+                </Form>
+                <Button id="search-button" variant="outline-dark" onClick={this.onSearchSubmit} size="sm" >
+                  Search
+                </Button>
+              </Col>
               <Col xs={1}>
                 {this.state.loggedIn ? (
-                  <h4 id="user-greeting">Hi, {this.state.username}!</h4>
+                  <h6 id="user-greeting">Hi, {this.state.username}!</h6>
                 ) : (
                   <Button
                     id="login-btn"
                     variant="outline-dark"
+                    size="sm"
                     onClick={this.showLogin}
                   >
                     Login
@@ -219,6 +251,7 @@ export default class App extends Component {
                 {this.state.loggedIn ? (
                   <Button
                     id="sign-out-btn"
+                    size="sm"
                     variant="outline-dark"
                     onClick={this.onSignout}
                   >
@@ -227,6 +260,7 @@ export default class App extends Component {
                 ) : (
                   <Button
                     id="signup-btn"
+                    size="sm"
                     variant="outline-dark"
                     onClick={this.showSignUp}
                   >
@@ -237,6 +271,7 @@ export default class App extends Component {
               <Col xs={1}>
                 <Button
                   id="favorite-btn"
+                  size="sm"
                   variant="outline-dark"
                   onClick={this.showFavorites}
                 >
@@ -251,6 +286,7 @@ export default class App extends Component {
             <Alert
               variant="danger"
               dismissible
+              closeLabel=""
               onClose={() => {
                 this.setState({ signInFail: false });
               }}
@@ -262,6 +298,7 @@ export default class App extends Component {
             <Alert
               variant="success"
               dismissible
+              closeLabel=""
               onClose={() => {
                 this.setState({ signInSuccess: false });
               }}
@@ -271,6 +308,7 @@ export default class App extends Component {
           ) : this.state.signUpFail ? (
             <Alert
               variant="danger"
+              closeLabel=""
               dismissible
               onClose={() => {
                 this.setState({ signUpFail: false });
@@ -284,27 +322,6 @@ export default class App extends Component {
         {!this.state.favoritesClicked ? (
           <div id="main">
             <div>
-              <Form>
-                <Form.Label>Search for your favorite game!</Form.Label>
-                <Form.Control
-                  size="sm"
-                  id="search-bar"
-                  type="text"
-                  placeholder="Game Title"
-                  onChange={this.onSearchbarInput}
-                  style={{
-                    display: "inline-block",
-                    marginLeft: 20 + "px",
-                    marginRight: 20 + "px",
-                  }}
-                />
-                <Button variant="outline-dark" onClick={this.onSearchSubmit}>
-                  Search
-                </Button>
-              </Form>
-            </div>
-
-            <div>
               <GameList
                 gameList={this.state.games}
                 addToFavorites={this.addToFavorites}
@@ -317,87 +334,18 @@ export default class App extends Component {
             removeFromFavorites={this.removeFromFavorites}
           />
         )}
-        <Modal id="signup-modal" show={this.state.showSignUp}>
-          <ModalHeader
-            closeButton
-            onHide={() => {
-              this.setState({ showSignUp: false });
-            }}
-          />
-          <ModalBody>
-            <Form>
-              <Form.Group></Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="sm"
-                  id="username"
-                  type="text"
-                  placeholder="Username"
-                  onChange={this.onUsernameInput}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="sm"
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  onChange={this.onPasswordInput}
-                />
-              </Form.Group>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              id="create-user"
-              variant="outline-dark"
-              style={{ marginTop: 20 + "px" }}
-              onClick={this.onCreateUser}
-            >
-              Create a new User
-            </Button>
-          </ModalFooter>
-        </Modal>
-        <Modal id="login-modal" show={this.state.showLogin}>
-          <ModalHeader
-            closeButton
-            onHide={() => {
-              this.setState({ showLogin: false });
-            }}
-          />
-          <ModalBody>
-            <Form>
-              <Form.Group>
-                <Form.Control
-                  size="sm"
-                  id="username"
-                  type="text"
-                  placeholder="Username"
-                  onChange={this.onUsernameInput}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="sm"
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  onChange={this.onPasswordInput}
-                />
-              </Form.Group>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              id="login"
-              variant="outline-dark"
-              style={{ marginTop: 20 + "px" }}
-              onClick={this.onLogin}
-            >
-              Login
-            </Button>
-          </ModalFooter>
-        </Modal>
+        <SignUpModal
+          showSignUp={this.state.showSignUp}
+          onUsernameInput={this.onUsernameInput}
+          onPasswordInput={this.onPasswordInput}
+          onCreateUser={this.onCreateUser}
+        />
+        <SignInModal
+          showSignIn={this.state.showLogin}
+          onUsernameInput={this.onUsernameInput}
+          onPasswordInput={this.onPasswordInput}
+          onLogin={this.onLogin}
+        />
       </div>
     );
   }

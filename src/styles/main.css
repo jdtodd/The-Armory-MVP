@@ -4,16 +4,22 @@
 .logo {
   width: 400px;
   height: auto;
+  padding-right: 30px;
+  padding-top: 10px;
 }
 .btn {
   color: #B5B1B2;
   background-color: #74226C;
-  margin-top: 10px;
+  margin-top: 25px;
   margin-right: 20px;
   z-index: 2;
 }
 #search-bar {
-  width: 700px;
+  width: auto;
+  min-width: 400px;
+}
+#search-button {
+  margin-top: 0;
 }
 #main {
   margin-top: 50px;
@@ -41,12 +47,21 @@ a {
 a:hover {
   color: #4B2142
 }
-.form-label, p, div, h1, h2, h3, h4, h5 {
+.form-label, p, div, h1, h2, h3, h4, h5, h6 {
   color: #B5B1B2
 }
 img {
   padding-bottom: 30px;
 }
 #user-greeting {
-  padding-top: 15px;
+  padding-top: 30px;
+}
+button.close {
+  position: absolute;
+  right: 0;
+}
+.game-info {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid black
 }
