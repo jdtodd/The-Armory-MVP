@@ -5,7 +5,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const connection = require('../database/connection.js');
 const app = express();
-const port = 3000;
+const port = 8080;
 
 app.use(cors());
 app.use(bodyParser.json());

@@ -68,7 +68,7 @@ export default class App extends Component {
       }
     }
     axios
-      .get(`http://127.0.0.1:3000/game?searchTerm=${searchTerm}`)
+      .get(`http://127.0.0.1:8080/game?searchTerm=${searchTerm}`)
       .then((response) => {
         this.setState({ games: response.data });
       })
@@ -81,7 +81,7 @@ export default class App extends Component {
     this.setState({ favorites: [...this.state.favorites, game] });
     if (this.state.loggedIn) {
       axios
-        .post(`http://127.0.0.1:3000/addToFavs`, {
+        .post(`http://127.0.0.1:8080/addToFavs`, {
           userId: this.state.userId,
           game: game,
         })
@@ -141,7 +141,7 @@ export default class App extends Component {
     this.setState({ showSignUp: false });
     axios
       .post(
-        `http://localhost:3000/create?username=${this.state.username}&password=${this.state.userPassword}`
+        `http://localhost:8080/create?username=${this.state.username}&password=${this.state.userPassword}`
       )
       .then((res) => {
         this.setState({ loggedIn: true, userId: res.data[0].id });
@@ -162,7 +162,7 @@ export default class App extends Component {
   onLogin() {
     this.setState({ showLogin: false });
     axios
-      .post('http://localhost:3000/login', {
+      .post('http://localhost:8080/login', {
         username: this.state.username,
         password: this.state.userPassword,
       })
