@@ -12,13 +12,13 @@ Written using MySQL, Express.js, Node.js, React, React-Bootstrap, Webpack/Babel,
     * ESRB Rating (if provided by GiantBomb)
     * Description of game
     * Some games include:
-    * Weapon information
-    * Map information
-    * Character information
-    * DLC
-    * Platforms
-    * Game modes
-    * System Requirements (for PC)
+     * Weapon information
+     * Map information
+     * Character information
+     * DLC
+     * Platforms
+     * Game modes
+     * System Requirements (for PC)
  * Favorites List
  * New user creation
  * Login to retrieve previously favorited games
