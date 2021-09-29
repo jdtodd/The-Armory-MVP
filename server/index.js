@@ -34,7 +34,6 @@ app.get('/game', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
-  console.log(req.query);
   let queryArgs = [req.query.username, req.query.password];
   connection.query(
     'INSERT INTO Users (username, password) VALUES (?, ?)',

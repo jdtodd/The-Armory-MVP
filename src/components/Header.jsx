@@ -13,39 +13,13 @@ const Header = (props) => {
     <div className='header' style={{ height: 'auto' }}>
       <Container fluid>
         <Row>
-          <Col xs={3}>
+          <Col xs={8}>
             <img
               className='logo'
               onClick={props.goHome}
               src={logo}
               alt='The Armory Logo'
             ></img>
-          </Col>
-          <Col xs={5}>
-            <Form>
-              <Form.Control
-                size='sm'
-                id='search-bar'
-                type='text'
-                placeholder='Search for your favorite game!'
-                onChange={props.onSearchbarInput}
-                onKeyPress={(e) => {
-                  e.key === 'Enter' && props.onSearchSubmit(e);
-                }}
-                style={{
-                  display: 'inline-block',
-                  marginRight: 20 + 'px',
-                }}
-              />
-            </Form>
-            <Button
-              id='search-button'
-              variant='outline-dark'
-              onClick={props.onSearchSubmit}
-              size='sm'
-            >
-              Search
-            </Button>
           </Col>
           <Col xs={4}>
             {props.loggedIn ? (

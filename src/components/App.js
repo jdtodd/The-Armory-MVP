@@ -167,7 +167,6 @@ export default class App extends Component {
         password: this.state.userPassword,
       })
       .then((res) => {
-        console.log(res.data.favoritesList);
         let returnedFavs = res.data.favoritesList.map((game, idx) => {
           return JSON.parse(game.game);
         });
@@ -179,7 +178,7 @@ export default class App extends Component {
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         this.setState({ signInFail: true });
       });
   }
@@ -255,6 +254,31 @@ export default class App extends Component {
 
         {!this.state.favoritesClicked ? (
           <div id='main'>
+            <Form>
+              <Form.Control
+                size='sm'
+                id='search-bar'
+                type='text'
+                placeholder='Search for your favorite game!'
+                onChange={this.onSearchbarInput}
+                onKeyPress={(e) => {
+                  e.key === 'Enter' && props.onSearchSubmit(e);
+                }}
+                style={{
+                  display: 'inline-block',
+                  marginRight: 20 + 'px',
+                }}
+              />
+              <Button
+                id='search-button'
+                variant='outline-dark'
+                onClick={this.onSearchSubmit}
+                size='sm'
+                style={{ display: 'inline-block' }}
+              >
+                Search
+              </Button>
+            </Form>
             <div>
               <GameList
                 gameList={this.state.games}

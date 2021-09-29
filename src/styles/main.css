@@ -24,9 +24,11 @@ div.row {
   z-index: 2;
 }
 #search-bar {
-  width: 100%;
+  width: fit-content(50%);
   min-width: 250px;
   max-width: 600px;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 #search-button {
   margin-left: 10px;
