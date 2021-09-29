@@ -141,7 +141,7 @@ export default class App extends Component {
     this.setState({ showSignUp: false });
     axios
       .post(
-        `http://127.0.0.1:3000/create?username=${this.state.username}&password=${this.state.userPassword}`
+        `http://localhost:3000/create?username=${this.state.username}&password=${this.state.userPassword}`
       )
       .then((res) => {
         this.setState({ loggedIn: true, userId: res.data[0].id });
@@ -162,7 +162,7 @@ export default class App extends Component {
   onLogin() {
     this.setState({ showLogin: false });
     axios
-      .post('http://127.0.0.1:3000/login', {
+      .post('http://localhost:3000/login', {
         username: this.state.username,
         password: this.state.userPassword,
       })
